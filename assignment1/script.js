@@ -75,13 +75,22 @@ caveFloor.position.set(0, -2.5, 0)
 scene.add(caveFloor)
 
 // OBJECTS
-// torusKnot
-const torusKnotGeometry = new THREE.TorusKnotGeometry(1, 0.2)
-const torusKnotMaterial = new THREE.MeshNormalMaterial()
-const torusKnot = new THREE.Mesh(torusKnotGeometry, torusKnotMaterial)
-torusKnot.position.set(6, 1.5, 0)
-torusKnot.castShadow = true
-scene.add(torusKnot)
+// Cone
+const ConeGeometry = new THREE.ConeGeometry( 1, 2, 8)
+const ConeMaterial = new THREE.MeshNormalMaterial()
+const Cone = new THREE.Mesh(ConeGeometry, ConeMaterial)
+Cone.position.set(6, 2.5, 0)
+Cone.castShadow = true
+scene.add(Cone)
+
+const Cone2Geometry = new THREE.ConeGeometry( 1, 2, 8)
+const Cone2Material = new THREE.MeshNormalMaterial()
+const Cone2 = new THREE.Mesh(ConeGeometry, ConeMaterial)
+Cone2.rotation.x = Math.PI * 1
+Cone2.position.set(6, 0.5, 0)
+Cone2.castShadow = true
+scene.add(Cone2)
+
 
 /***********
 ** LIGHTS **
@@ -188,6 +197,11 @@ document.querySelector('#restart').onclick = function() {
     domObject.thirdChange = false 
     domObject.fourthChange = false
 
+    Cone.rotation.x = Math.PI * 10
+    Cone.position.set(6, 2.5, 0)
+    Cone2.rotation.x = Math.PI * 1
+    Cone2.position.set(6, 0.5, 0)
+
     // reset directionalLight
     directionalLight.position.set(8.6, 1.7, 0)
 }
@@ -249,23 +263,36 @@ const animation = () =>
 
     // first-change
     if(domObject.firstChange){
-        torusKnot.rotation.y = elapsedTime
-        torusKnot.rotation.z = elapsedTime
+        Cone.rotation.y = (elapsedTime * 0.5) * -6
+        Cone2.rotation.y = (elapsedTime * 0.5) * 6
+        
+        
     }
 
     // second-change
     if(domObject.secondChange){
-        torusKnot.position.y = Math.sin(elapsedTime * 0.5) * 6
+        Cone.position.z = Math.sin(elapsedTime * 0.5) * 6
+        Cone2.position.z = Math.sin(elapsedTime * 0.5) * 6
     }
 
     // third-change
     if(domObject.thirdChange){
-        torusKnot.position.y = 2
+        Cone.position.z = Math.sin(elapsedTime * 0.5) * 6
+        Cone.rotation.x = Math.sin(elapsedTime * 0.5) * 6
+        Cone2.rotation.x = Math.sin(elapsedTime * 0.5) * -6
+        Cone2.position.z = Math.sin(elapsedTime * 0.5) * -6
+
     }
 
     // fourth-change
     if(domObject.fourthChange){
-        directionalLight.position.y -= elapsedTime * 0.005
+        directionalLight.position.y += elapsedTime * 0.0010
+        Cone.position.y = 1.5
+        Cone.position.z = 4
+        Cone.rotation.x = Math.PI * 1.5
+        Cone2.position.y = 1.5
+        Cone2.position.z = -4
+        Cone2.rotation.x = Math.PI * -1.5
     }
 
 
