@@ -24,6 +24,7 @@ p {
 .clickable {
     color:aquamarine;
     cursor: grab;
+    text-shadow: 40pt;
 }
 
 .clickable:hover {
