@@ -34,7 +34,7 @@ scene.add(camera)
 
 // Renderer
 const renderer = new THREE.WebGLRenderer({
-    const: canvas,
+    canvas: canvas,
     antialias: true
 })
 renderer.setSize(sizes.width, sizes.height)
@@ -71,8 +71,8 @@ const blueMaterial = new THREE.MeshStandardMaterial({
 const drawCube = (i, material) =>
 {
     const cube = new THREE.Mesh(cubeGeometry, material)
-    cube.position.x = (Math.random() - 0.5) * 10 
-    cube.position.z = (Math.random() - 0.5) * 10 
+    cube.position.x = (Math.random() - 0.5) * 10
+    cube.position.z = (Math.random() - 0.5) * 10
     cube.position.y = i - 10
 
     cube.rotation.x = Math.random() * 2 * Math.PI
@@ -91,39 +91,36 @@ let preset = {}
 const uiobj = {
     text: '',
     textArray: [],
-    term1: 'katniss',
-    term2: 'peeta',
-    term3: 'snow',
+    term1: 'harry',
+    term2: 'snape',
+    term3: 'hagrid',
     rotateCamera: false,
-    reveal(){
+    reveal() {
         // Save terms to uiobj
-       preset = ui.save()
+        preset = ui.save()
 
-       // Parse Text and Terms
-       parseTextandTerms()
+        // Parse Text and Terms
+        parseTextandTerms()
 
-       // Hide termsFolder ui
-       termsFolder.hide()
+        // Hide termsFolder ui
+        termsFolder.hide()
 
-       // Show interationFolder ui
-       createInteractionFolders()
+        // Show interationFolder ui
+        createInteractionFolders()
 
     }
 }
 
 // Text Parsers
 // Load source text
-fetch('https://raw.githubusercontent.com/pull-ups/ybigta_21winter/master/2021.%202.%204%20(%EB%AA%A9)%20wordcloud-konlpy/The%20Hunger%20Games.txt')
+fetch("https://raw.githubusercontent.com/amephraim/nlp/master/texts/J.%20K.%20Rowling%20-%20Harry%20Potter%201%20-%20Sorcerer's%20Stone.txt")
     .then(response => response.text())
-    .then((data) =>
-    {
-        uiobj.text = data       
+    .then((data) => {
+        uiobj.text = data
     }
     )
-
 // Parse Text and Terms
-const parseTextandTerms = () =>
-{
+const parseTextandTerms = () => {
     // Strip periods and downcase text 
     const parsedText = uiobj.text.replaceAll(".", "").toLowerCase()
 
@@ -138,22 +135,22 @@ const parseTextandTerms = () =>
 
     // Find term 3
     findTermInParsedText(uiobj.term3, blueMaterial)
+    
 }
 
-const findTermInParsedText = (term, material) =>
-{
-    for (let i=0; i < 10; i++)
-    {
-        if(uiobj.textArray[i] === term)
-        {
-        // covert i into n, which is a value between 0 and 20
-        const n = (100 / uiobj.textArray.length) * i * 0.2
-
-        // call drawCube function using converted n value
-        for(let a=0; a < 5; a++)
-        {
-            drawCube(n, material)
-        }
+const findTermInParsedText = (term, material) => {
+    for (let i = 0; i < uiobj.textArray.length; i++) {
+        console.log(uiobj.textArray[i]);
+        if (uiobj.textArray[i] === term) {
+            // covert i into n, which is a value between 0 and 20
+            const n = (100 / uiobj.textArray.length) * i * 0.2
+         
+            // call drawCube function 5 times using converted n value
+            for(let a=0; a < 5; a++)
+            {
+               drawCube(n, material)
+            }
+   
 
         }
     }
@@ -182,8 +179,7 @@ termsFolder
     .name('Reveal')
 
 // Interaction Folder 
-const createInteractionFolders = () =>
-{
+const createInteractionFolders = () => {
     // Cubes Folder
     const cubesFolder = ui.addFolder('Filter Terms')
 
@@ -195,7 +191,7 @@ const createInteractionFolders = () =>
         .add(greenMaterial, 'visible')
         .name(`${uiobj.term2}`)
 
-    cubesFolder 
+    cubesFolder
         .add(blueMaterial, 'visible')
         .name(`${uiobj.term3}`)
 
@@ -215,8 +211,7 @@ const createInteractionFolders = () =>
 const clock = new THREE.Clock()
 
 // Animate 
-const animation = () =>
-{
+const animation = () => {
     // Return elapsedTime
     const elapsedTime = clock.getElapsedTime()
 
@@ -224,8 +219,7 @@ const animation = () =>
     controls.update()
 
     // Camera Rotation
-    if(uiobj.rotateCamera)
-    {
+    if (uiobj.rotateCamera) {
         camera.position.x = Math.sin(elapsedTime * 0.2) * 16
         camera.position.y = Math.cos(elapsedTime * 0.2) * 16
     }
