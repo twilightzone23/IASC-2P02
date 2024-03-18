@@ -17,3 +17,19 @@ h1 {
     z-index: -1;
 }
 
+.lil-gui .name {
+    font-size: 14px;
+    font-weight: bold;
+}
+
+#lil-gui-name-1, #lil-gui-name-5 {
+    color: red;
+}
+
+#lil-gui-name-2, #lil-gui-name-6 {
+    color: green;
+}
+
+#lil-gui-name-3, #lil-gui-name-7 {
+    color: blue;
+}
