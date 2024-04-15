@@ -54,17 +54,17 @@ scene.add(directionalLight)
 ** MESHES **
 ************/
 // Sphere Geometry
-const coneGeometry = new THREE.ConeGeometry( 1, 5, 6 );
+const coneGeometry = new THREE.ConeGeometry( 1, 2, 6 );
 
 // Sphere Materials
 const orangeMaterial = new THREE.MeshStandardMaterial({
-    color: new THREE.Color('orange')
+    color: new THREE.Color('#7B7554')
 })
 const pinkMaterial = new THREE.MeshStandardMaterial({
-    color: new THREE.Color('pink')
+    color: new THREE.Color('#7E6B8F')
 })
 const aquaMaterial = new THREE.MeshStandardMaterial({
-    color: new THREE.Color('aqua')
+    color: new THREE.Color('#6B0F1A')
 })
 
 const drawSphere = (i, material) =>
@@ -94,7 +94,7 @@ const uiobj = {
     textArray: [],
     term1: 'tributes',
     term2: 'death',
-    term3: 'games',
+    term3: 'survival',
     rotateCamera: false,
     animateBubbles: false
 }
@@ -176,7 +176,7 @@ const ui = new dat.GUI({
 
         conesFolder
         .add(uiobj, 'animateBubbles')
-        .name('Animate Bubbles')
+        .name('Animate Cones')
 
     // Camera Folder
     const cameraFolder = ui.addFolder('Camera')
@@ -213,8 +213,8 @@ const animation = () =>
         {
             if(scene.children[i].type === "Mesh")
             {
-                scene.children[i].scale.x = Math.sin(elapsedTime * scene.children[i].randomizer)
-                scene.children[i].scale.y = Math.sin(elapsedTime * scene.children[i].randomizer)
+                scene.children[i].rotation.x = Math.sin(elapsedTime * 0.5 * 6 * scene.children[i].randomizer)
+                scene.children[i].rotation.y = Math.sin(elapsedTime * 0.5 * 6 * scene.children[i].randomizer)
                 scene.children[i].scale.z = Math.sin(elapsedTime * scene.children[i].randomizer)
             }
         }

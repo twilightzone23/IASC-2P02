@@ -53,32 +53,34 @@ scene.add(directionalLight)
 /***********
 ** MESHES **
 ************/
-// Cube Geometry
-const cubeGeometry = new THREE.BoxGeometry(0.5, 0.5, 0.5)
+// Sphere Geometry
+const sphereGeometry = new THREE.SphereGeometry(0.5)
 
 // Cube Materials
 const redMaterial = new THREE.MeshStandardMaterial({
-    color: new THREE.Color('red')
+    color: new THREE.Color('#ECA72C')
 })
 const greenMaterial = new THREE.MeshStandardMaterial({
-    color: new THREE.Color('green')
+    color: new THREE.Color('#95B2B8')
 })
 const blueMaterial = new THREE.MeshStandardMaterial({
-    color: new THREE.Color('blue')
+    color: new THREE.Color('#6EEB83')
 })
 
-const drawCube = (i, material) =>
+const drawSphere = (i, material) =>
 {
-    const cube = new THREE.Mesh(cubeGeometry, material)
-    cube.position.x = (Math.random() - 0.5) * 10
-    cube.position.z = (Math.random() - 0.5) * 10
-    cube.position.y = i - 10
+    const sphere = new THREE.Mesh(sphereGeometry, material)
+    sphere.position.x = (Math.random() - 0.5) * 10
+    sphere.position.z = (Math.random() - 0.5) * 10
+    sphere.position.y = i - 10
 
-    cube.rotation.x = Math.random() * 2 * Math.PI
-    cube.rotation.y = Math.random() * 2 * Math.PI
-    cube.rotation.z = Math.random() * 2 * Math.PI
+    sphere.rotation.x = Math.random() * 2 * Math.PI
+    sphere.rotation.y = Math.random() * 2 * Math.PI
+    sphere.rotation.z = Math.random() * 2 * Math.PI
 
-    scene.add(cube)
+    sphere.randomizer = Math.random()
+
+    scene.add(sphere)
 }
 
 
@@ -90,9 +92,9 @@ let preset = {}
 const uiobj = {
     text: '',
     textArray: [],
-    term1: 'katniss',
+    term1: 'love',
     term2: 'peeta',
-    term3: 'snow',
+    term3: 'hope',
     rotateCamera: false
 }
 
@@ -133,7 +135,7 @@ const findTermInParsedText = (term, material) =>
          // call drawCube function 5 times using converted n value
          for(let a=0; a < 5; a++)
          {
-            drawCube(n, material)
+            drawSphere(n, material)
          }
 
         }

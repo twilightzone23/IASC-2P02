@@ -45,15 +45,15 @@ ul > li {
 }
 
 #red {
-    color: red;
+    color: #ECA72C;
 }
 
 #green {
-    color: green;
+    color: #95B2B8;
 }
 
 #blue {
-    color: blue;
+    color: #6EEB83;
 }
 
 /* UI */
@@ -70,25 +70,25 @@ ul > li {
 }
 
 #lil-gui-name-1  {
-    color: red;
+    color: #ECA72C;
 }
 
 #lil-gui-name-2  {
-    color: green;
+    color: #95B2B8;
 }
 
 #lil-gui-name-3  {
-    color: blue;
+    color: #6EEB83;
 }
 
 #lil-gui-name-5 {
-    color: orange;
+    color: #7B7554;
 }
 
 #lil-gui-name-6 {
-    color: pink;
+    color: #7E6B8F;
 }
 
 #lil-gui-name-7 {
-    color: aqua;
+    color: #6B0F1A;
 }
